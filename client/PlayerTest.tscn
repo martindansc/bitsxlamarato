@@ -1,0 +1,44 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
+[ext_resource path="res://player_textures/walk1.tres" type="Texture" id=2]
+[ext_resource path="res://player_textures/walk2.tres" type="Texture" id=3]
+[ext_resource path="res://player_textures/walk3.tres" type="Texture" id=4]
+[ext_resource path="res://player_textures/walk4.tres" type="Texture" id=5]
+[ext_resource path="res://player_textures/walk5.tres" type="Texture" id=6]
+[ext_resource path="res://player_textures/walk6.tres" type="Texture" id=7]
+[ext_resource path="res://player_textures/walk7.tres" type="Texture" id=8]
+[ext_resource path="res://player_textures/walk8.tres" type="Texture" id=9]
+[ext_resource path="res://player_textures/walk9.tres" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 23.0287
+height = 48.9916
+
+[node name="Node2D" type="Node2D"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 57.6963, 81.0495 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 1 )
+animation = "run"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 2 )
