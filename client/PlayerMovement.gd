@@ -23,6 +23,8 @@ var prev_jump_pressed = false
 
 var first_position
 
+onready var ANI = get_node("AnimatedSprite")
+
 func _ready():
 	first_position = position
 
@@ -47,6 +49,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	if is_on_floor():
+		ANI.play("run")
 		on_air_time = 0
 		
 	if jumping and velocity.y > 0:
@@ -54,9 +57,8 @@ func _physics_process(delta):
 		jumping = false
 	
 	if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
-		# Jump must also be allowed to happen if the character left the floor a little bit ago.
-		# Makes controls more snappy.
 		velocity.y = -JUMP_SPEED
+		ANI.play("jump")
 		jumping = true
 	
 	on_air_time += delta
