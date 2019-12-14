@@ -1,29 +1,43 @@
 const WebSocket = require('ws')
 const { GdBuffer } = require('@gd-com/utils')
-const { v4 } = require('uuid')
-const process = require('./process')
+const packets = require("./packets")
+
 
 const wss = new WebSocket.Server({ port: 8080 })
 
+// we assume game is always client 0! Not so beatifull but works for demo proposes.
+let ws_clients = [];
+
+function sendMoveUp() {
+  let packet = new GdBuffer()
+  packet.putU16(packets.OK_GO_UP)
+
+  ws_clients[0].send(packet.getBuffer())
+}
+
+function sendMoveDown() {
+  let packet = new GdBuffer()
+  packet.putU16(packets.OK_GO_DOWN)
+
+  ws_clients[0].send(packet.getBuffer())
+}
+
 wss.on('connection', ws => {
-  let uuid = v4()
-  console.log(`[${uuid}] Connected`)
-  
-  // send is uuid
-  let uuidPacket = new GdBuffer()
-  uuidPacket.putU16(1)
-  uuidPacket.putString(uuid)
-   ws.send(uuidPacket.getBuffer())
+
+  let id = ws_clients.length;
+  ws_clients.push(ws);
+
+  console.log(`[${id}] Connected`)
 
   ws.on('message', (message) => {
-    let recieve = new GdBuffer(Buffer.from(message))
-
-    const type = recieve.getU16()
-    console.log(`[${uuid}] << Recieve packet code`, type)
-    if (process.hasOwnProperty(type)) {
-      process[`${type}`](uuid, ws, recieve.getBuffer())
-    } else {
-      console.log(`[${uuid}] << Unknow packet code`, type)
+    if(id > 0) {
+        if(message == packets.HAPPY) {
+          sendMoveUp();
+        }
+        else if(message == packets.ANGRY) {
+          sendMoveDown();
+        }
     }
   })
+
 })

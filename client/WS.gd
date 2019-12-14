@@ -15,10 +15,10 @@ func _ready():
 func _connection_established(protocol):
 	print("Connection Established With Protocol: ", protocol)
 	
-func _connection_closed():
+func _connection_closed(param):
 	print("Connection Closed")
 
-func _connection_error():
+func _connection_error(param):
 	print("Connection Error")
     
 func _process(delta):
@@ -26,16 +26,11 @@ func _process(delta):
 		ws.poll()
 	
 	if ws.get_peer(1).is_connected_to_host():
-		if Input.is_action_just_released("ui_left"):
-				var buffer = StreamPeerBuffer.new()
-				buffer.put_u16(1001)
-				_sendPacket(buffer.get_data_array())
+		if Input.is_action_just_released("ui_up"):
+				print("OK_GO_UP")
 
-		if Input.is_action_just_released("ui_right"):
-				var buffer = StreamPeerBuffer.new()
-				buffer.put_u16(1002)
-				buffer.put_string('an extra parameter')
-				_sendPacket(buffer.get_data_array())
+		if Input.is_action_just_released("ui_down"):
+				print("OK_GO_DOWN")
 		
 		if ws.get_peer(1).get_available_packet_count() > 0 :
 			var packet = ws.get_peer(1).get_packet()
@@ -45,13 +40,11 @@ func _process(delta):
 			var type = buffer.get_u16()
 			print('Recieve %s' % type)
 			match type:
-				1:
-					print("My id is %s !" % buffer.get_string())
 				1003:
-					print("We recieve OK_GO_LEFT !")
+					print("We recieve OK_GO_UP")
 				1004:
-					print("We recieve OK_GO_RIGHT !")
-					# extra data
+					print("We recieve OK_GO_DOWN")
+				_:
 					print("Recieve extra %s : " % buffer.get_string())
 			
 func _sendPacket(data):
