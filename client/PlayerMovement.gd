@@ -41,7 +41,6 @@ func _physics_process(delta):
 	velocity += force * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
-	
 	if is_on_floor():
 		on_air_time = 0
 		
@@ -57,3 +56,21 @@ func _physics_process(delta):
 	
 	on_air_time += delta
 	prev_jump_pressed = jump
+	
+	var collisionCounter = get_slide_count()
+	for i in collisionCounter:
+		var collision = get_slide_collision(i)
+		handle_collision(collision)
+
+func handle_collision(collision):
+	var collider = collision.collider
+	if collider is TileMap:
+		var col_cell = Vector2()
+		var tile_pos = collider.world_to_map(position)
+		tile_pos -= collision.normal
+		var tile = collider.get_cellv(tile_pos)
+		if(tile != -1):
+			var tile_name = collider.tile_set.tile_get_name(tile)
+			print(tile_name)
+			if("Spike" in tile_name):
+				get_tree().reload_current_scene()
