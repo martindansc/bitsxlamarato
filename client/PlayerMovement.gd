@@ -21,6 +21,11 @@ var jumping = false
 
 var prev_jump_pressed = false
 
+var first_position
+
+func _ready():
+	first_position = position
+
 func _physics_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
@@ -60,17 +65,25 @@ func _physics_process(delta):
 	var collisionCounter = get_slide_count()
 	for i in collisionCounter:
 		var collision = get_slide_collision(i)
+		if(i == 0):
+			check_pos(collision.collider.world_to_map(position), collision.collider)
 		handle_collision(collision)
-
+		
 func handle_collision(collision):
 	var collider = collision.collider
 	if collider is TileMap:
 		var col_cell = Vector2()
 		var tile_pos = collider.world_to_map(position)
 		tile_pos -= collision.normal
-		var tile = collider.get_cellv(tile_pos)
-		if(tile != -1):
-			var tile_name = collider.tile_set.tile_get_name(tile)
-			print(tile_name)
-			if("Spike" in tile_name or "Acid" in tile_name):
-				get_tree().reload_current_scene()
+		check_pos(tile_pos, collider)
+		
+				
+func check_pos(position, tilemap):
+	var tile = tilemap.get_cellv(position)
+	if(tile != -1):
+		var tile_name = tilemap.tile_set.tile_get_name(tile)
+		if("Spike" in tile_name or "Acid" in tile_name):
+			set_global_position(first_position)
+
+func _on_Area2D_body_entered(body):
+	set_global_position(first_position)

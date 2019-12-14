@@ -42,10 +42,10 @@
 [ext_resource path="res://player_textures/walk9.tres" type="Texture" id=40]
 [ext_resource path="res://map/parallax-10-outer space.svg" type="Texture" id=41]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=30]
 points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=31]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
@@ -139,7 +139,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 30 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -155,7 +155,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 31 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -576,7 +576,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 27/z_index = 0
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=32]
 animations = [ {
 "frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ) ],
 "loop": true,
@@ -584,7 +584,7 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=31]
+[sub_resource type="CapsuleShape2D" id=33]
 radius = 23.0287
 height = 48.9916
 
@@ -607,6 +607,7 @@ scale = Vector2( 0.40351, 0.355873 )
 texture = ExtResource( 30 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 6589.14, 555.408 )
 script = ExtResource( 31 )
 __meta__ = {
@@ -615,13 +616,13 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.75, 0.75 )
-frames = SubResource( 30 )
+frames = SubResource( 32 )
 animation = "run"
-frame = 1
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 31 )
+shape = SubResource( 33 )
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 offset = Vector2( 300, 0 )
