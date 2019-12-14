@@ -72,5 +72,5 @@ func handle_collision(collision):
 		if(tile != -1):
 			var tile_name = collider.tile_set.tile_get_name(tile)
 			print(tile_name)
-			if("Spike" in tile_name):
+			if("Spike" in tile_name or "Acid" in tile_name):
 				get_tree().reload_current_scene()
