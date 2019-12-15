@@ -24,12 +24,25 @@ var jump_signal = false
 
 var first_position
 
+var playing = false
+
 onready var ANI = get_node("AnimatedSprite")
 
 func _ready():
 	first_position = position
+	reset()
+	
+func reset():
+	playing = true
+	get_tree().reload_current_scene()
 
+func continue():
+	playing = true
+	
 func _physics_process(delta):
+	if(!playing):
+		return
+	
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	
@@ -73,7 +86,7 @@ func _physics_process(delta):
 	var collisionCounter = get_slide_count()
 	for i in collisionCounter:
 		var collision = get_slide_collision(i)
-		if(i == 0):
+		if(i == 0 and collision.collider is TileMap):
 			check_pos(collision.collider.world_to_map(position), collision.collider)
 		handle_collision(collision)
 		
@@ -87,11 +100,19 @@ func handle_collision(collision):
 		
 				
 func check_pos(position, tilemap):
-	var tile = tilemap.get_cellv(position)
-	if(tile != -1):
-		var tile_name = tilemap.tile_set.tile_get_name(tile)
-		if("Spike" in tile_name or "Acid" in tile_name):
-			set_global_position(first_position)
+	if tilemap is TileMap:
+		var tile = tilemap.get_cellv(position)
+		if(tile != -1):
+			var tile_name = tilemap.tile_set.tile_get_name(tile)
+			if("Spike" in tile_name or "Acid" in tile_name):
+				playing = false
+				ANI.play("die")
 
 func _on_Area2D_body_entered(body):
-	set_global_position(first_position)
+	playing = false
+	ANI.play("win")
+
+
+func _on_AnimatedSprite_animation_finished():
+	if(playing == false):
+		reset()
