@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://WS.gd" type="Script" id=1]
 [ext_resource path="res://map/png/tiles/Acid (1).png" type="Texture" id=2]
@@ -63,6 +63,11 @@
 [ext_resource path="res://map/png/Objects/DoorUnlocked.png" type="Texture" id=61]
 [ext_resource path="res://map/png/Objects/Switch (1).png" type="Texture" id=62]
 [ext_resource path="res://map/png/Objects/Switch (2).png" type="Texture" id=63]
+[ext_resource path="res://enemy.gd" type="Script" id=64]
+[ext_resource path="res://enemies/walk1.tres" type="Texture" id=65]
+[ext_resource path="res://enemies/walk2.tres" type="Texture" id=66]
+[ext_resource path="res://enemies/walk3.tres" type="Texture" id=67]
+[ext_resource path="res://enemies/walk4.tres" type="Texture" id=68]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 32, 64, 32, 64, 64, 0, 64 )
@@ -609,7 +614,7 @@ animations = [ {
 "frames": [ ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
 "loop": true,
 "name": "win",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ) ],
 "loop": true,
@@ -630,6 +635,18 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=33]
 radius = 23.0287
 height = 48.9916
+
+[sub_resource type="SpriteFrames" id=34]
+animations = [ {
+"frames": [ ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=35]
+radius = 40.6062
+height = 4.79976
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -661,6 +678,7 @@ __meta__ = {
 }
 
 [node name="DoorOpen" type="Sprite" parent="."]
+editor/display_folded = true
 position = Vector2( 9189.82, 1696.61 )
 scale = Vector2( 0.401015, 0.417897 )
 texture = ExtResource( 32 )
@@ -675,7 +693,7 @@ position = Vector2( -13650.8, 2246.01 )
 shape = SubResource( 31 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 31.6322, 462.503 )
+position = Vector2( -41.7725, 388.321 )
 script = ExtResource( 33 )
 __meta__ = {
 "_edit_group_": true
@@ -685,7 +703,6 @@ __meta__ = {
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 32 )
 animation = "win"
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -758,5 +775,40 @@ texture = ExtResource( 63 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 873.635, 398.424 )
+script = ExtResource( 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D2"]
+scale = Vector2( 0.888553, 0.888553 )
+frames = SubResource( 34 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2"]
+position = Vector2( -7.24406, 0 )
+shape = SubResource( 35 )
+
+[node name="KinematicBody2D3" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 8251.15, 1748.35 )
+script = ExtResource( 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D3"]
+scale = Vector2( 0.888553, 0.888553 )
+frames = SubResource( 34 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D3"]
+position = Vector2( -7.24406, 0 )
+shape = SubResource( 35 )
 [connection signal="body_entered" from="DoorOpen/Area2D" to="KinematicBody2D" method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="KinematicBody2D/AnimatedSprite" to="KinematicBody2D" method="_on_AnimatedSprite_animation_finished"]

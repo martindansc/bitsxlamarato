@@ -29,12 +29,11 @@ var playing = false
 onready var ANI = get_node("AnimatedSprite")
 
 func _ready():
+	playing = true
 	first_position = position
-	reset()
 	
 func reset():
-	playing = true
-	set_global_position(first_position)
+	get_tree().reload_current_scene()
 
 func continue():
 	playing = true
@@ -86,7 +85,12 @@ func _physics_process(delta):
 	var collisionCounter = get_slide_count()
 	for i in collisionCounter:
 		var collision = get_slide_collision(i)
-		if(i == 0):
+		
+		if(collision.collider is KinematicBody2D):
+			playing = false
+			ANI.play("die")
+			
+		if(i == 0 and collision.collider is TileMap):
 			check_pos(collision.collider.world_to_map(position), collision.collider)
 		handle_collision(collision)
 		
@@ -109,7 +113,7 @@ func check_pos(position, tilemap):
 
 func _on_Area2D_body_entered(body):
 	playing = false
-	ANI.play("win", true)
+	ANI.play("win")
 
 
 func _on_AnimatedSprite_animation_finished():
