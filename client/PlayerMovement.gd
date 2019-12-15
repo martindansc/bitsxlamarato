@@ -24,12 +24,25 @@ var jump_signal = false
 
 var first_position
 
+var playing = false
+
 onready var ANI = get_node("AnimatedSprite")
 
 func _ready():
 	first_position = position
+	reset()
+	
+func reset():
+	playing = true
+	set_global_position(first_position)
 
+func continue():
+	playing = true
+	
 func _physics_process(delta):
+	if(!playing):
+		return
+	
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	
@@ -91,7 +104,14 @@ func check_pos(position, tilemap):
 	if(tile != -1):
 		var tile_name = tilemap.tile_set.tile_get_name(tile)
 		if("Spike" in tile_name or "Acid" in tile_name):
-			set_global_position(first_position)
+			playing = false
+			ANI.play("die")
 
 func _on_Area2D_body_entered(body):
-	set_global_position(first_position)
+	playing = false
+	ANI.play("win", true)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if(playing == false):
+		reset()
