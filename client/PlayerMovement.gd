@@ -20,6 +20,7 @@ var on_air_time = 100
 var jumping = false
 
 var prev_jump_pressed = false
+var jump_signal = false
 
 var first_position
 
@@ -32,9 +33,14 @@ func _physics_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	
-	var walk_left = Input.is_action_pressed("ui_left")
-	var walk_right = Input.is_action_pressed("ui_right")
-	var jump = Input.is_action_pressed("ui_up")
+	#var walk_left = Input.is_action_pressed("ui_left")
+	#var walk_right = Input.is_action_pressed("ui_right")
+	#var jump = Input.is_action_pressed("ui_up")
+	
+	var walk_left = false
+	var walk_right = true
+	var jump = jump_signal
+	jump_signal = false
 	
 	var stop = true
 	
