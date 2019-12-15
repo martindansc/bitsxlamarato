@@ -16,6 +16,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if(player.reset):
+		set_global_position(first_position)
+	
 	var velocity = Vector2()
 	# Create forces
 	var force = Vector2(0, GRAVITY)

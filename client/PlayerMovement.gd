@@ -26,6 +26,8 @@ var first_position
 
 var playing = false
 
+var reset = false
+
 onready var ANI = get_node("AnimatedSprite")
 
 func _ready():
@@ -33,7 +35,10 @@ func _ready():
 	first_position = position
 	
 func reset():
-	get_tree().reload_current_scene()
+	playing = true
+	reset = true
+	ANI.play("win")
+	set_global_position(first_position)
 
 func continue():
 	playing = true
@@ -41,6 +46,8 @@ func continue():
 func _physics_process(delta):
 	if(!playing):
 		return
+		
+	reset = false
 	
 	# Create forces
 	var force = Vector2(0, GRAVITY)

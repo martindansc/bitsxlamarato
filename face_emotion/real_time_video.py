@@ -22,7 +22,7 @@ async def detectAndSend(ws):
     cv2.namedWindow('your_face')
     camera = cv2.VideoCapture(0)
 
-    vector_size = 10
+    vector_size = 8
 
     j = 0
     last_emotions = [None]*vector_size
@@ -56,7 +56,7 @@ async def detectAndSend(ws):
             if(label == "disgust" or label == "scared" or label == "sad"):
                 label = "angry"
 
-            if(last_emotions.count(label) > 8):
+            if(last_emotions.count(label) > 6):
                 last_emotions = [None]*vector_size
                 await ws.send(label)
 
