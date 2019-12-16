@@ -33,31 +33,31 @@
 [ext_resource path="res://map/png/Objects/Box.png" type="Texture" id=31]
 [ext_resource path="res://map/png/Objects/DoorOpen.png" type="Texture" id=32]
 [ext_resource path="res://PlayerMovement.gd" type="Script" id=33]
-[ext_resource path="res://player_textures/start5.tres" type="Texture" id=34]
-[ext_resource path="res://player_textures/start4.tres" type="Texture" id=35]
-[ext_resource path="res://player_textures/start3.tres" type="Texture" id=36]
-[ext_resource path="res://player_textures/start2.tres" type="Texture" id=37]
-[ext_resource path="res://player_textures/start1.tres" type="Texture" id=38]
-[ext_resource path="res://player_textures/jump1.tres" type="Texture" id=39]
-[ext_resource path="res://player_textures/jump2.tres" type="Texture" id=40]
-[ext_resource path="res://player_textures/jump3.tres" type="Texture" id=41]
-[ext_resource path="res://player_textures/jump4.tres" type="Texture" id=42]
-[ext_resource path="res://player_textures/walk1.tres" type="Texture" id=43]
-[ext_resource path="res://player_textures/walk2.tres" type="Texture" id=44]
-[ext_resource path="res://player_textures/walk3.tres" type="Texture" id=45]
-[ext_resource path="res://player_textures/walk4.tres" type="Texture" id=46]
-[ext_resource path="res://player_textures/walk5.tres" type="Texture" id=47]
-[ext_resource path="res://player_textures/walk6.tres" type="Texture" id=48]
-[ext_resource path="res://player_textures/walk7.tres" type="Texture" id=49]
-[ext_resource path="res://player_textures/walk8.tres" type="Texture" id=50]
-[ext_resource path="res://player_textures/walk9.tres" type="Texture" id=51]
-[ext_resource path="res://player_textures/dead1.tres" type="Texture" id=52]
-[ext_resource path="res://player_textures/dead2.tres" type="Texture" id=53]
-[ext_resource path="res://player_textures/dead3.tres" type="Texture" id=54]
-[ext_resource path="res://player_textures/dead4.tres" type="Texture" id=55]
-[ext_resource path="res://player_textures/dead5.tres" type="Texture" id=56]
-[ext_resource path="res://player_textures/dead6.tres" type="Texture" id=57]
-[ext_resource path="res://player_textures/dead7.tres" type="Texture" id=58]
+[ext_resource path="res://player_textures/jump1.tres" type="Texture" id=34]
+[ext_resource path="res://player_textures/jump2.tres" type="Texture" id=35]
+[ext_resource path="res://player_textures/jump3.tres" type="Texture" id=36]
+[ext_resource path="res://player_textures/jump4.tres" type="Texture" id=37]
+[ext_resource path="res://player_textures/walk1.tres" type="Texture" id=38]
+[ext_resource path="res://player_textures/walk2.tres" type="Texture" id=39]
+[ext_resource path="res://player_textures/walk3.tres" type="Texture" id=40]
+[ext_resource path="res://player_textures/walk4.tres" type="Texture" id=41]
+[ext_resource path="res://player_textures/walk5.tres" type="Texture" id=42]
+[ext_resource path="res://player_textures/walk6.tres" type="Texture" id=43]
+[ext_resource path="res://player_textures/walk7.tres" type="Texture" id=44]
+[ext_resource path="res://player_textures/walk8.tres" type="Texture" id=45]
+[ext_resource path="res://player_textures/walk9.tres" type="Texture" id=46]
+[ext_resource path="res://player_textures/dead1.tres" type="Texture" id=47]
+[ext_resource path="res://player_textures/dead2.tres" type="Texture" id=48]
+[ext_resource path="res://player_textures/dead3.tres" type="Texture" id=49]
+[ext_resource path="res://player_textures/dead4.tres" type="Texture" id=50]
+[ext_resource path="res://player_textures/dead5.tres" type="Texture" id=51]
+[ext_resource path="res://player_textures/dead6.tres" type="Texture" id=52]
+[ext_resource path="res://player_textures/dead7.tres" type="Texture" id=53]
+[ext_resource path="res://player_textures/start5.tres" type="Texture" id=54]
+[ext_resource path="res://player_textures/start4.tres" type="Texture" id=55]
+[ext_resource path="res://player_textures/start3.tres" type="Texture" id=56]
+[ext_resource path="res://player_textures/start2.tres" type="Texture" id=57]
+[ext_resource path="res://player_textures/start1.tres" type="Texture" id=58]
 [ext_resource path="res://map/parallax-10-outer space.svg" type="Texture" id=59]
 [ext_resource path="res://map/bajada.jpg" type="Texture" id=60]
 [ext_resource path="res://map/png/Objects/DoorUnlocked.png" type="Texture" id=61]
@@ -611,24 +611,24 @@ extents = Vector2( 14230.6, 186.127 )
 
 [sub_resource type="SpriteFrames" id=32]
 animations = [ {
-"frames": [ ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
-"loop": true,
-"name": "win",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ) ],
+"frames": [ ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
 "loop": true,
 "name": "jump",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
+"frames": [ ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ) ],
 "loop": true,
 "name": "run",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ) ],
+"frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ) ],
 "loop": false,
 "name": "die",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ) ],
+"loop": true,
+"name": "win",
 "speed": 10.0
 } ]
 
@@ -703,6 +703,7 @@ __meta__ = {
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 32 )
 animation = "win"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
